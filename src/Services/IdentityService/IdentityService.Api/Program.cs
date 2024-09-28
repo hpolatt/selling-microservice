@@ -28,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.RegisterWithConsule(app.Services.GetRequiredService<IHostApplicationLifetime>(), app.Configuration);
+app.RegisterWithConsul(app.Services.GetRequiredService<IHostApplicationLifetime>(), app.Configuration);
 
 app.Run();

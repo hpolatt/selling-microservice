@@ -1,24 +1,16 @@
-using System;
 using Consul;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http.Features;
-
 namespace IdentityService.Api.Extensions;
 
 public static class ConsuleRegistration
 {
     public static IServiceCollection ConfigureConsul(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
-        {
-            var address = configuration["ConsulConfig:HttpEndpoint"];
-            consulConfig.Address = new Uri(address);
-        }));
+        services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig => consulConfig.Address = new Uri(configuration["ConsulConfig:Address"])));
 
         return services;
     }
 
-    public static IApplicationBuilder RegisterWithConsule(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
+    public static IApplicationBuilder RegisterWithConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
     {
         var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
 
