@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.4.0
+    hostname: 402e2829d793
+    environment:
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - GOSU_VERSION=1.17
+      - REDIS_VERSION=7.4.0
+      - REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.4.0.tar.gz
+      - REDIS_DOWNLOAD_SHA=57b47c2c6682636d697dbf5d66d8d495b4e653afc9cd32b7adf9da3e433b8aaf
+    volumes:
+      - /data:/data
+    networks:
+      - bridge
+    working_dir: /data
+    ports:
+      - "6379:6379"
+    restart: "no"
+    runtime: runc
+
+networks:
+  bridge:
+    driver: bridge

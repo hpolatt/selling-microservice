@@ -15,7 +15,7 @@ namespace IdentityService.Api.Controllers
             this.identityService = identityService;
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequestModel model)
         {
             var response = await identityService.Login(model);

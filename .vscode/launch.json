@@ -1,32 +1,63 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "C#: NotificationService",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}/src/Services/NotificationService/NotificationService/NotificationService.csproj",
-            "launchConfigurationId": "TargetFramework=;NotificationService"
-        },
-        {
-            "name": "C#: CatalogService.Api",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}/src/Services/CatalogService/CatalogService.Api/CatalogService.Api.csproj"
-        },
-        {
-            "name": "C#: PaymentService.Api",
-            "type": "dotnet",
-            "request": "launch",
-            "projectPath": "${workspaceFolder}/src/Services/PaymentService/PaymentService.Api/PaymentService.Api.csproj"
-        }
-    ],
-    "compounds": [
+  "version": "0.2.0",
+  "configurations": [
     {
-      "name": "NotificationService & PaymentService",
+      "name": "C#: BasketService.Api",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Services/BasketService/BasketService.Api/BasketService.Api.csproj",
+      "launchConfigurationId": "TargetFramework=;BasketService.Api"
+    },
+    {
+      "name": "C#: Web.ApiGateway",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/ApiGateways/WebApiClient/Web.ApiGateway/Web.ApiGateway.csproj",
+      "launchConfigurationId": "TargetFramework=;Web.ApiGateWay"
+    },
+    {
+      "name": "C#: OrderService.Api",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Services/OrderService/OrderService.Api/OrderService.Api.csproj",
+      "launchConfigurationId": "TargetFramework=;OrderService.Api"
+    },
+    {
+      "name": "C#: IdentityService.Api",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Services/IdentityService/IdentityService.Api/IdentityService.Api.csproj",
+      "launchConfigurationId": "TargetFramework=;IdentityService.Api"
+    },
+    {
+      "name": "C#: PaymentService.Api",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Services/PaymentService/PaymentService.Api/PaymentService.Api.csproj",
+      "launchConfigurationId": "TargetFramework=;PaymentService.Api "
+    },
+    {
+      "name": "C#: CatalogService.Api",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Services/CatalogService/CatalogService.Api/CatalogService.Api.csproj",
+      "launchConfigurationId": "TargetFramework=;CatalogService.Api"
+    },
+    {
+      "name": "C#: NotificationService",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Services/NotificationService/NotificationService/NotificationService.csproj",
+      "launchConfigurationId": "TargetFramework=;NotificationService"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "ApiGateway",
       "configurations": [
-        "C#: NotificationService",
-        "C#: PaymentService.Api"
+        "C#: IdentityService.Api",
+        "C#: CatalogService.Api",
+        "C#: Web.ApiGateway"
       ],
       "stopAll": true
     }
