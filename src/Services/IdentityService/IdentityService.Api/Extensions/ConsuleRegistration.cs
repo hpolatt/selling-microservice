@@ -30,23 +30,24 @@ public static class ConsuleRegistration
         var serviceName = configuration.GetValue<string>("ConsulConfig:ServiceName");
         var serviceId = configuration.GetValue<string>("ConsulConfig:ServiceId");
 
-        var registeration = new AgentServiceRegistration()
+        var registration = new AgentServiceRegistration()
         {
-            ID = $"IdentityService",
-            Name = "IdentityService",
+            ID = serviceId ?? "IdentityService",
+            Name = serviceName ?? "IdentityService",
             Address = $"{uri.Host}",
             Port = uri.Port,
-            Tags = new[] { "IdentityService", "Identity" }
+            Tags = new[] { serviceName, serviceId }
         };
 
+
         logger.LogInformation("Registering with Consul");
-        consulClient.Agent.ServiceDeregister(registeration.ID).Wait();
-        consulClient.Agent.ServiceRegister(registeration).Wait();
+        consulClient.Agent.ServiceDeregister(registration.ID).Wait();
+        consulClient.Agent.ServiceRegister(registration).Wait();
 
         lifetime.ApplicationStopping.Register(() =>
         {
             logger.LogInformation("Deregistering from Consul");
-            consulClient.Agent.ServiceDeregister(registeration.ID).Wait();
+            consulClient.Agent.ServiceDeregister(registration.ID).Wait();
         });
 
         return app;
