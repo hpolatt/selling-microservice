@@ -1,0 +1,7 @@
+CatalogType
+1,Mug
+2,T-Shirt
+3,Sheet
+4,USB Memory
+5,CatalogTypeTestOne
+6,CatalogTypeTestTwo
