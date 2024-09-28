@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C#: NotificationService",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/src/Services/NotificationService/NotificationService/NotificationService.csproj",
+            "launchConfigurationId": "TargetFramework=;NotificationService"
+        },
+        {
+            "name": "C#: CatalogService.Api",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/src/Services/CatalogService/CatalogService.Api/CatalogService.Api.csproj"
+        },
+        {
+            "name": "C#: PaymentService.Api",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/src/Services/PaymentService/PaymentService.Api/PaymentService.Api.csproj"
+        }
+    ],
+    "compounds": [
+    {
+      "name": "NotificationService & PaymentService",
+      "configurations": [
+        "C#: NotificationService",
+        "C#: PaymentService.Api"
+      ],
+      "stopAll": true
+    }
+  ]
+}

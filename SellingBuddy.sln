@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8DDB10FA-5FCB-4C92-8799-33CB647D265F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{645AD7C9-B9FB-4C2B-B10F-BA86507E2945}"
+	ProjectSection(SolutionItems) = preProject
+		ServiceUrls.txt = ServiceUrls.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{6F629BB8-A83C-437E-915F-15F04DE77631}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{49789BB8-EFE6-4E43-A088-716DB5BD6215}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{40C313BF-4EFF-45C7-A78F-C95E3D4B597A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{996B7193-7359-46E8-BB6D-4B3184B890C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F5C074D3-F3E7-4865-B74B-4323636C97FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{CEFFCBF3-18F5-49F9-97E5-343578B9F679}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5563BE9A-BD3F-4D25-BC19-E05C0C9B4C84}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F629BB8-A83C-437E-915F-15F04DE77631} = {8DDB10FA-5FCB-4C92-8799-33CB647D265F}
+		{49789BB8-EFE6-4E43-A088-716DB5BD6215} = {8DDB10FA-5FCB-4C92-8799-33CB647D265F}
+		{40C313BF-4EFF-45C7-A78F-C95E3D4B597A} = {8DDB10FA-5FCB-4C92-8799-33CB647D265F}
+		{996B7193-7359-46E8-BB6D-4B3184B890C4} = {8DDB10FA-5FCB-4C92-8799-33CB647D265F}
+		{CEFFCBF3-18F5-49F9-97E5-343578B9F679} = {F5C074D3-F3E7-4865-B74B-4323636C97FA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,4 @@
+{
+    "dotnet.defaultSolution": "Web.sln",
+    "dotnet-test-explorer.enableTelemetry": false
+}
