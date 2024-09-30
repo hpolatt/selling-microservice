@@ -23,7 +23,7 @@ builder.Services.AddSingleton(sp =>
         ConnectionRetryCount = 5,
         EventNameSuffix = "IntegrationEvent",
         SubscriberClientAppName = "PaymentService",
-        EventBusType = EventBusType.RabbitMQ
+        EventBusType = EventBusType.RabbitMQ,
     };
     return EventBusFactory.Create(config, sp);
 });

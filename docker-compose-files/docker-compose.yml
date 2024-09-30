@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+# Consul
+  s_consul:
+    image: consul:1.15.4
+    container_name: Consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+# RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: RabbitMQ
+    ports:
+      - 5672:5672
+      - 15672:15672
+# Redis
+  redis:
+    image: redis:7.4.0
+    container_name: redis
+    ports:
+      - 6379:6379
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    hostname: 06bd8141823d
+    user: mssql
+    mac_address: 02:42:ac:11:00:03
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "root123!"
+      MSSQL_PID: "Evaluation"
+      PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      MSSQL_RPC_PORT: 135
+      CONFIG_EDGE_BUILD: ""
+    ports:
+      - "1433:1433"
+    restart: "no"
+    labels:
+      com.microsoft.product: "Microsoft SQL Server"
+      com.microsoft.version: "16.0.4145.4"
+      org.opencontainers.image.ref.name: "ubuntu"
+      org.opencontainers.image.version: "22.04"
+      vendor: "Microsoft"
+    runtime: runc
+

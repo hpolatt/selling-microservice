@@ -60,6 +60,14 @@
         "C#: Web.ApiGateway"
       ],
       "stopAll": true
+    },
+    {
+      "name": "BasketTest",
+      "configurations": [
+        "C#: IdentityService.Api",
+        "C#: BasketService.Api"
+      ],
+      "stopAll": true
     }
   ]
 }

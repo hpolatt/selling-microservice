@@ -1,6 +1,6 @@
 using Consul;
 
-namespace CatalogService.Api.Extensions;
+namespace BasketService.Api.Extensions;
 public static class ConsulRegistration
 {
     public static IServiceCollection ConfigureConsul(this IServiceCollection services, IConfiguration configuration)
@@ -22,8 +22,8 @@ public static class ConsulRegistration
 
         var registration = new AgentServiceRegistration()
         {
-            ID = serviceId ?? "CatalogService",
-            Name = serviceName ?? "CatalogService",
+            ID = serviceId ?? "BasketService",
+            Name = serviceName ?? "BasketService",
             Address = uri.Host,
             Port = uri.Port,
             Tags = new[] { serviceName, serviceId }

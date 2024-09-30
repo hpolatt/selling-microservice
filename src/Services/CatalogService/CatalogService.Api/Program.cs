@@ -1,6 +1,6 @@
+
 using CatalogService.Api.Extensions;
 using CatalogService.Api.Infrastructure;
-using CatalogService.Api.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
