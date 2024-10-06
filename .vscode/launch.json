@@ -49,6 +49,12 @@
       "request": "launch",
       "projectPath": "${workspaceFolder}/src/Services/NotificationService/NotificationService/NotificationService.csproj",
       "launchConfigurationId": "TargetFramework=;NotificationService"
+    },
+    {
+      "name": "C#: WebApp",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/src/Clients/BlazorWebApp/WebApp/WebApp.csproj"
     }
   ],
   "compounds": [
@@ -58,6 +64,15 @@
         "C#: IdentityService.Api",
         "C#: CatalogService.Api",
         "C#: Web.ApiGateway"
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "WebTest",
+      "configurations": [
+        "C#: IdentityService.Api",
+        "C#: Web.ApiGateway",
+        "C#: WebApp"
       ],
       "stopAll": true
     }

@@ -9,6 +9,13 @@ namespace IdentityService.Api.Application.Services;
 
 public class IdentityService : IIdentityService
 {
+
+    private readonly IConfiguration configuration;
+
+    public IdentityService(IConfiguration configuration)
+    {
+        this.configuration = configuration;
+    }
     public Task<LoginResponseModel> Login(LoginRequestModel model)
     {
         // Db process
@@ -20,7 +27,7 @@ public class IdentityService : IIdentityService
             new Claim(ClaimTypes.Role, "Admin"),
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
         var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expiry = DateTime.Now.AddDays(20);
 
