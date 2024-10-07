@@ -22,23 +22,26 @@ public class AuthStateProvider : AuthenticationStateProvider
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        string apiToken = await localStorage.GetTokenAsync();
+        String apiToken = await localStorage.GetTokenAsync();
 
-        if (string.IsNullOrEmpty(apiToken)) return anonymous;
+        if (String.IsNullOrEmpty(apiToken))
+            return anonymous;
 
-        string userName = await localStorage.GetUsernameAsync();
+        String userName = await localStorage.GetUsernameAsync();
 
-        ClaimsIdentity identity = new ClaimsIdentity(new[]
+        var cp = new ClaimsPrincipal(new ClaimsIdentity(new[]
         {
-            new Claim(ClaimTypes.Name, userName)
-        }, "jwtAuthType");
+                new Claim(ClaimTypes.Name, userName)
 
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiToken);
+            }, "jwtAuthType"));
 
-        return new AuthenticationState(new ClaimsPrincipal(identity));
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiToken);
+
+        return new AuthenticationState(cp);
     }
 
-    public void NotifyUserLogin(string userName) {
+    public void NotifyUserLogin(string userName)
+    {
         ClaimsIdentity identity = new ClaimsIdentity(new[]
         {
             new Claim(ClaimTypes.Name, userName)
@@ -48,7 +51,8 @@ public class AuthStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(authState);
     }
 
-    public void NotifyUserLogout() {
+    public void NotifyUserLogout()
+    {
         var authState = Task.FromResult(anonymous);
         NotifyAuthenticationStateChanged(authState);
     }

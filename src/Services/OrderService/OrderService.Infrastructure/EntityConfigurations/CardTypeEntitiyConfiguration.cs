@@ -2,7 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderService.Domain.AggregateModels.BuyerAggregate;
-using OrderService.Infrastructure.Context;
+
 
 namespace OrderService.Infrastructure.EntityConfigurations;
 
@@ -10,7 +10,7 @@ public class CardTypeEntitiyConfiguration : IEntityTypeConfiguration<CardType>
 {
     public void Configure(EntityTypeBuilder<CardType> builder)
     {
-        builder.ToTable("cardtypes", OrderDbContext.DEFAULT_SCHEMA);
+        builder.ToTable("cardtypes");
 
         builder.HasKey(ct => ct.Id);
         

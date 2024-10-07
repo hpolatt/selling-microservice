@@ -1,5 +1,7 @@
 ﻿NoficationService           -> Console App
 
+WebApp              -> http://localhost:2001
+
 Web.ApiGateWay              -> http://localhost:5000
 PaymentService.Api          -> http://localhost:5001
 OrderService.Api            -> http://localhost:5002

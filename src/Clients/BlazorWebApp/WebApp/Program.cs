@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using WebApp.Application.Services;
 using WebApp.Application.Services.Interfaces;
 using WebApp.Components;
+using WebApp.Infrastructure;
 using WebApp.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,19 +13,28 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddBlazoredLocalStorage();
+
+// Add services to the container.
+builder.Services.AddTransient<IIdentityService, IdentityService>();
+builder.Services.AddTransient<ICatalogService, CatalogService>();
+builder.Services.AddTransient<IBasketService, BasketService>();
+
+// Add AuthStateProvider
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
+builder.Services.AddTransient<AuthTokenHandler>();
+
+builder.Services.AddHttpClient("ApiClient")
+    .AddHttpMessageHandler<AuthTokenHandler>();
+
 builder.Services.AddScoped(sp => {
     var clientFactory = sp.GetRequiredService<IHttpClientFactory>();
     return clientFactory.CreateClient("ApiGateWayHttpClient");
 });
 
-builder.Services.AddTransient<IIdentityService, IdentityService>();
-
-
 builder.Services.AddHttpClient("ApiGateWayHttpClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:5000");
-});
+    client.BaseAddress = new Uri("http://localhost:5000");
+}).AddHttpMessageHandler<AuthTokenHandler>();;
 
 var app = builder.Build();
 

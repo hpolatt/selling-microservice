@@ -9,7 +9,7 @@ public class OrderStatusEntitiyConfiguration : IEntityTypeConfiguration<OrderSta
 {
     public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<OrderStatus> builder)
     {
-        builder.ToTable("orderstatuses", OrderDbContext.DEFAULT_SCHEMA);
+        builder.ToTable("orderstatuses");
 
         builder.HasKey(o => o.Id);
 

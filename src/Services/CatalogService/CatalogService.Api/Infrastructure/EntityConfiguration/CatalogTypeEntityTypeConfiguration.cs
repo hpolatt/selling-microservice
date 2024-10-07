@@ -1,6 +1,5 @@
 using System;
 using CatalogService.Api.Core.Domain;
-using CatalogService.Api.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +9,7 @@ public class CatalogTypeEntityTypeConfiguration : IEntityTypeConfiguration<Catal
 {
     public void Configure(EntityTypeBuilder<CatalogType> builder)
     {
-        builder.ToTable("CatalogTypes", CatalogContext.DEFAULT_SCHEMA);
+        builder.ToTable("CatalogTypes");
 
         builder.HasKey(ci => ci.Id);
 

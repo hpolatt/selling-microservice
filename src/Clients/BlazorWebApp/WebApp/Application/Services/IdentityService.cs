@@ -12,35 +12,36 @@ namespace WebApp.Application.Services;
 public class IdentityService : IIdentityService
 {
     private readonly HttpClient httpClient;
-    private readonly ISyncLocalStorageService syncLocalStorageService;
+    private readonly ILocalStorageService syncLocalStorageService;
     private readonly AuthenticationStateProvider authenticationStateProvider;
 
-    public IdentityService(HttpClient httpClient, ISyncLocalStorageService syncLocalStorageService, AuthenticationStateProvider authenticationStateProvider)
+    public IdentityService(HttpClient httpClient, ILocalStorageService syncLocalStorageService, AuthenticationStateProvider authenticationStateProvider)
     {
         this.httpClient = httpClient;
         this.syncLocalStorageService = syncLocalStorageService;
         this.authenticationStateProvider = authenticationStateProvider;
     }
-    public string GetUserToken()
+    public async Task<string> GetUserToken()
     {
-       return syncLocalStorageService.GetToken();
+       return await syncLocalStorageService.GetTokenAsync();
     }
 
-    public string GetUsername()
+    public async Task<string> GetUsername()
     {
-       return syncLocalStorageService.GetUsername();
+       return await syncLocalStorageService.GetUsernameAsync();
     }
 
-    public bool IsLoggedIn() => !string.IsNullOrWhiteSpace(GetUserToken());
+    public async Task<bool> IsLoggedIn() => !string.IsNullOrWhiteSpace(await GetUserToken());
 
     public async Task<bool> Login(string username, string password)
     {
         var req = new UserLoginRequest(username, password);
 
-        var res = await httpClient.PostGetResponseAsync<UserLoginResponse, UserLoginRequest>("api/identity/login", req);
-        if (res.Token is not null) {
-            syncLocalStorageService.SetToken(res.Token);
-            syncLocalStorageService.SetUsername(res.UserName);
+        var res = await httpClient.PostGetResponseAsync<UserLoginResponse, UserLoginRequest>("auth", req);
+        if (res.Token is not null)
+        {
+            await syncLocalStorageService.SetTokenAsync(res.Token);
+            await syncLocalStorageService.SetUsernameAsync(res.UserName);
             ((AuthStateProvider)authenticationStateProvider).NotifyUserLogin(res.UserName);
 
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", res.Token);
@@ -49,10 +50,10 @@ public class IdentityService : IIdentityService
         return false;
     }
 
-    public void Logout()
+    public async Task Logout()
     {
-        syncLocalStorageService.RemoveItem("token");
-        syncLocalStorageService.RemoveItem("username");
+        await syncLocalStorageService.RemoveItemAsync("token");
+        await syncLocalStorageService.RemoveItemAsync("username");
         ((AuthStateProvider)authenticationStateProvider).NotifyUserLogout();
 
         httpClient.DefaultRequestHeaders.Authorization = null;

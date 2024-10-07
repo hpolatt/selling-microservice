@@ -5,14 +5,14 @@ namespace WebApp.Application.Services.Interfaces;
 public interface IIdentityService
 {
 
-    string GetUsername();
+    Task<string> GetUsername();
 
-    string GetUserToken();
+    Task<string> GetUserToken();
 
-    bool IsLoggedIn();
+    Task<bool> IsLoggedIn();
 
     Task<bool> Login(string username, string token);
 
-    void Logout();
+    Task Logout();
 
 }

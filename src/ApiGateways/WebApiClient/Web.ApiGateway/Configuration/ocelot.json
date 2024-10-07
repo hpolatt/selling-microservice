@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/catalog/{everything}",
@@ -27,8 +27,6 @@
       "UpstreamScheme": "http"
     },
     {
-      "UseServiceDiscovery": true,
-      "ServiceName": "BasketService",
       "DownstreamPathTemplate": "/api/Basket/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -38,6 +36,19 @@
         }
       ],
       "UpstreamPathTemplate": "/basket/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http"
+    },
+    {
+      "DownstreamPathTemplate": "/api/order/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/order/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http"
     }

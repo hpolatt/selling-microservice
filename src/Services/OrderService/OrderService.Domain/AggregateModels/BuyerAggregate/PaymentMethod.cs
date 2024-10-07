@@ -6,7 +6,7 @@ namespace OrderService.Domain.AggregateModels.BuyerAggregate;
 
 public class PaymentMethod : BaseEntity
 {
-    public string Alias { get; set; }
+    public string CardTypeAlias { get; set; }
     public string CardNumber { get; set; }
     public string SecurityNumber { get; set; }
     public string CardHolderName { get; set; }
@@ -29,7 +29,7 @@ public class PaymentMethod : BaseEntity
         }
 
         Expiration = expiration;
-        Alias = alias;
+        CardTypeAlias = alias;
         CardTypeId = cardTypeId;
     }
 

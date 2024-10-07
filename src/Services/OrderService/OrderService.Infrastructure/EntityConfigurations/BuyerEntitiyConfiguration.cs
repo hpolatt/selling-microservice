@@ -2,7 +2,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderService.Domain.AggregateModels.BuyerAggregate;
-using OrderService.Infrastructure.Context;
 
 namespace OrderService.Infrastructure.EntityConfigurations;
 
@@ -10,7 +9,7 @@ public class BuyerEntitiyConfiguration : IEntityTypeConfiguration<Buyer>
 {
     public void Configure(EntityTypeBuilder<Buyer> builder)
     {
-        builder.ToTable("buyers", OrderDbContext.DEFAULT_SCHEMA);
+        builder.ToTable("buyers");
 
         builder.HasKey(b => b.Id);
 
