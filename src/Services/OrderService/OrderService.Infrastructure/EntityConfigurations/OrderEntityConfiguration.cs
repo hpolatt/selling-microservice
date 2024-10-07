@@ -1,9 +1,7 @@
-using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderService.Domain.AggregateModels.OrderAggregate;
-using OrderService.Infrastructure.Context;
+
 
 namespace OrderService.Infrastructure.EntityConfigurations;
 
@@ -11,7 +9,7 @@ public class OrderEntityConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.ToTable("orders", OrderDbContext.DEFAULT_SCHEMA);
+        builder.ToTable("orders");
 
         builder.HasKey(o => o.Id);
         builder.Property(o => o.Id)
@@ -23,11 +21,6 @@ public class OrderEntityConfiguration : IEntityTypeConfiguration<Order>
         {
             a.WithOwner();
         });
-
-        builder.Property<int>("_orderStatusId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("OrderStatusId")
-            .IsRequired();
 
         var navigation = builder.Metadata.FindNavigation(nameof(Order.OrderItems));
 

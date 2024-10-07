@@ -1,22 +1,28 @@
 ﻿@page "/logout"
+@rendermode InteractiveServer
 
 @using System.Web;
 
 @code {
     [Inject]
-    IIdentityService IdentityService { get; set; }
+    IIdentityService identityService { get; set; }
 
     [Inject]
-    NavigationManager NavigationManager { get; set; }
+    NavigationManager navigationManager { get; set; }
 
-    protected override void OnInitialized()
+    private bool isInitialized = false;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        IdentityService.Logout();
+        if (firstRender && !isInitialized)
+        {
+            isInitialized = true;
+            
+            await identityService.Logout();
 
-        var coll = HttpUtility.ParseQueryString(new Uri(NavigationManager.Uri).Query);
-        string returnUrl = coll.Get("returnUrl") ?? "/";
-        NavigationManager.NavigateTo(returnUrl);
-    }
-
+            var coll = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+            string returnUrl = coll.Get("returnUrl") ?? "/";
+            navigationManager.NavigateTo(returnUrl);
+        }
+}
 
 }

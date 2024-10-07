@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CatalogService.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/")]
 [ApiController]
 public class PictureController : ControllerBase
 {
@@ -26,7 +26,7 @@ public class PictureController : ControllerBase
     }
 
     [HttpGet]
-    [Route("api/v1/catalog/items/{catalogItemId:int}/pic")]
+    [Route("catalog/picture/{catalogItemId:int}")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     // GET: /<controller>/

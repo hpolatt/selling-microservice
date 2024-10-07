@@ -1,14 +1,11 @@
 using System;
 using CatalogService.Api.Core.Domain;
-using CatalogService.Api.Infrastructure.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
 
 namespace CatalogService.Api.Infrastructure.Context;
 
 public class CatalogContext : DbContext
 {
-    public const string DEFAULT_SCHEMA = "catalog";
-
     public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
     {
     }

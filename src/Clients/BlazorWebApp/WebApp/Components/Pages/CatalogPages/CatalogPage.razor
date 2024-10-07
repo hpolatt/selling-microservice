@@ -1,0 +1,41 @@
+﻿@page "/catalog"
+@rendermode InteractiveServer
+
+<div class="row">
+    @if(paginatedItems.Data != null && paginatedItems.Data.Any()) {
+        foreach (var catalogItem in paginatedItems.Data) {
+            <div class="col-md-3">
+                <ProductView CatalogItem="@catalogItem" OnAddToCard="()=>AddToCatalog(catalogItem)"/>
+            </div>
+        }
+    }
+</div>
+
+@code {
+
+
+    [Inject]
+    public ICatalogService catalogService { get; set; }
+    [Inject]
+    public IBasketService basketService { get; set; }
+    [Inject]
+    public IIdentityService identityService { get; set; }
+    [Inject]
+    public NavigationManager navigationManager { get; set; }
+
+    PaginatedItemsViewModel<CatalogItem> paginatedItems = new PaginatedItemsViewModel<CatalogItem>();
+
+    public async Task AddToCatalog(CatalogItem catalogItem) {
+        if (!await identityService.IsLoggedIn()) {
+            navigationManager.NavigateTo($"/login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}");
+            return;
+        }
+
+        await basketService.AddItemToBasketAsync(catalogItem.Id);
+    }
+
+     protected override async Task OnInitializedAsync()
+    {
+        paginatedItems = await catalogService.GetCatalogItemsAsync(1, 10, null, null);
+    }
+}  

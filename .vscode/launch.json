@@ -54,7 +54,8 @@
       "name": "C#: WebApp",
       "type": "dotnet",
       "request": "launch",
-      "projectPath": "${workspaceFolder}/src/Clients/BlazorWebApp/WebApp/WebApp.csproj"
+      "projectPath": "${workspaceFolder}/src/Clients/BlazorWebApp/WebApp/WebApp.csproj",
+      "launchConfigurationId": "TargetFramework=;WebApp"
     }
   ],
   "compounds": [
@@ -71,6 +72,8 @@
       "name": "WebTest",
       "configurations": [
         "C#: IdentityService.Api",
+        "C#: CatalogService.Api",
+        "C#: BasketService.Api",
         "C#: Web.ApiGateway",
         "C#: WebApp"
       ],

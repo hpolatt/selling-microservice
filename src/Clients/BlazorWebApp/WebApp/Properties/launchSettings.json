@@ -9,11 +9,11 @@
       }
     },
     "profiles": {
-      "http": {
+      "WebApp": {
         "commandName": "Project",
         "dotnetRunMessages": true,
         "launchBrowser": true,
-        "applicationUrl": "http://localhost:5204",
+        "applicationUrl": "http://localhost:2001",
         "environmentVariables": {
           "ASPNETCORE_ENVIRONMENT": "Development"
         }

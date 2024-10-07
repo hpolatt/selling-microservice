@@ -12,7 +12,6 @@ namespace OrderService.Infrastructure.Context;
 
 public class OrderDbContext: DbContext, IUnitOfWork
 {
-    public const string DEFAULT_SCHEMA = "ordering";
     private readonly IMediator mediator;
 
     public OrderDbContext(): base()
@@ -51,5 +50,13 @@ public class OrderDbContext: DbContext, IUnitOfWork
         modelBuilder.ApplyConfiguration(new CardTypeEntitiyConfiguration());
 
     }
+
+      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=order; TrustServerCertificate=True; User ID=sa; Password=root123!;", b => b.MigrationsAssembly("OrderService.Infrastructure"));
+            }
+        }
 
 }

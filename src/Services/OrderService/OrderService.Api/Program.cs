@@ -18,8 +18,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-
-
 // Configuration 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -47,22 +45,17 @@ builder.Services.AddSingleton(sp => {
     return EventBusFactory.Create(eventBusConfig, sp);
 });
 
+var app = builder.Build();
 
-// register MigrateDbContext from IWebhost
-var webhost = builder.WebHost.UseDefaultServiceProvider((context, options) =>
-{
-    options.ValidateOnBuild = false;
-}).Build();
 
-webhost.MigrateDbContext<OrderDbContext>((context, services) =>
+// MigrateDbContext
+using (var scope = app.Services.CreateScope())
 {
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<OrderDbContext>();
     var logger = services.GetRequiredService<ILogger<OrderDbContext>>();
     new OrderDbContextSeed().SeedAsync(context, logger).Wait();
-});
-
-
-
-var app = builder.Build();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
